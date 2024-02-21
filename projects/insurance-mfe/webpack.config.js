@@ -1,57 +1,18 @@
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const mf = require("@angular-architects/module-federation/webpack");
-const path = require("path");
-const share = mf.share;
+//const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const { shareAll, withModuleFederationPlugin } = require("@angular-architects/module-federation/webpack");
 
-const sharedMappings = new mf.SharedMappings();
-sharedMappings.register(
-  path.join(__dirname, '../../tsconfig.json'),
-  [/* mapped paths to share */]);
-
-module.exports = {
-  output: {
-    uniqueName: "insuranceMfe",
-    publicPath: "auto"
+module.exports=withModuleFederationPlugin({
+  name: 'insuranceMfe',
+  exposes: {
+    './Module': './projects/insurance-mfe/src/app/insurance-display/insurance-display.module.ts',
   },
-  optimization: {
-    runtimeChunk: false
-  },   
-  resolve: {
-    alias: {
-      ...sharedMappings.getAliases(),
-    }
-  },
-  experiments: {
-    outputModule: true
-  },
-  plugins: [
-    new ModuleFederationPlugin({
-        library: { type: "module" },
 
-        // For remotes (please adjust)
-        // name: "insuranceMfe",
-        // filename: "remoteEntry.js",
-        // exposes: {
-        //     './Component': './projects/insurance-mfe/src/app/app.component.ts',
-        // },        
-        
-        // For hosts (please adjust)
-        // remotes: {
-        //     "hostApp": "http://localhost:4200/remoteEntry.js",
-        //     "premiumMfe": "http://localhost:4200/remoteEntry.js",
-
-        // },
-
-        shared: share({
-          "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-
-          ...sharedMappings.getDescriptors()
-        })
-        
+  shared: {
+    ...shareAll({
+      singleton: true,
+      strictVersion: true,
+      requiredVersion: 'auto',
     }),
-    sharedMappings.getPlugin()
-  ],
-};
+  },
+  
+})

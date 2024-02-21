@@ -1,1 +1,31 @@
-<p>insurance-display works!</p>
+    <div id="fetchInsuranceForm">
+    <h3>Insurance Details</h3>
+        <form [formGroup]="numberInputForm" (ngSubmit)="fetchInsuranceDetails()">
+            <label id="insuranceNumberLabel">Insurance Number</label>
+            <input type="text" placeholder="Insurance Number" formControlName="insuranceNumber"><br>
+            <button class="btn btn-success" type="submit"><b>Fetch Details</b></button>
+        </form>
+    </div>
+    <br> 
+    <label *ngIf="insuranceNotFound" class="text-danger">Insurance not found</label>
+    <div id="overallDiv" *ngIf="showInsuranceDetails">
+    <ng-container>
+        <div id="insuranceDetailsDiv">
+    <h4>Insured Person Details</h4>
+    <label class="insuranceDetailsLabel">Name:</label>&nbsp;&nbsp;<label>{{fid.Name}}</label><br>
+    <label class="insuranceDetailsLabel">Email:</label>&nbsp;&nbsp;<label>{{fid.Email}}</label><br>
+    <label class="insuranceDetailsLabel">Phone:</label>&nbsp;&nbsp;<label>{{fid.Phone}}</label><br>
+    <label class="insuranceDetailsLabel">Address:</label>&nbsp;&nbsp;<label>{{fid.Address}}</label><br>
+        </div>
+    <br>
+        <div id="insuranceDetailsDiv">
+    <h4>Insurance Details</h4>
+    <label class="insuranceDetailsLabel">Insurance Number:</label>&nbsp;&nbsp;<label>{{fid.InsuranceNumber}}</label><br>
+    <label class="insuranceDetailsLabel">Name:</label>&nbsp;&nbsp;<label>{{fid.PolicyName}}</label><br>
+    <label class="insuranceDetailsLabel">Details:</label>&nbsp;&nbsp;<label>{{fid.Details}}</label><br>
+    <label class="insuranceDetailsLabel">Start Date:</label>&nbsp;&nbsp;<label>{{fid.StartDate}}</label><br>
+    <label class="insuranceDetailsLabel">End Date:</label>&nbsp;&nbsp;<label>{{fid.EndDate}}</label><br>
+    <label class="insuranceDetailsLabel">Current Deposit:</label>&nbsp;&nbsp;<label>{{fid.CurrentDeposit}}</label><br>
+        </div>
+    </ng-container> 
+    </div>

@@ -1,0 +1,30 @@
+<h2>Pay your Premium</h2>
+<div id="premiumPayDiv">
+    <div id="fetchInsuranceForm"> 
+            <form [formGroup]="numberInputForm" (ngSubmit)="fetchInsuranceDetails()">
+                <label id="insuranceNumberLabel">Insurance Number</label>
+                <input type="text" placeholder="Insurance Number" formControlName="insuranceNumber"><br>
+                <button class="btn btn-success" type="submit"><b>Fetch Details</b></button>
+            </form>
+            <label *ngIf="insuranceNotFound" class="text-danger">Insurance not found</label>
+    </div>
+    <br>
+    <form [formGroup]="amountDepositForm" (ngSubmit)="depositAmount()">
+    <table>
+    <tr>
+        <td class="formLabels">Insured Person Name:</td>
+        <td><input type="text" formControlName="Name" readonly></td>
+    </tr>
+    <tr>
+        <td class="formLabels">Policy Name:</td>
+        <td><input type="text" formControlName="PolicyName" readonly></td>
+    </tr>
+    <tr>
+        <td class="formLabels">Amount:</td>
+        <td><input type="text" placeholder="Installment Amount" formControlName="CurrentDeposit"></td>
+    </tr>
+    </table>
+    <button class="btn btn-success" type="submit">Pay</button>
+    </form>
+    <label id="depositResult">Congrats!!, Your deposit Amount is now Rs {{updatedInsurance.CurrentDeposit}}</label>
+</div>

@@ -30,9 +30,12 @@
 							"projects/host-app/src/assets"
 						],
 						"styles": [
-							"projects/host-app/src/styles.sass"
+							"projects/host-app/src/styles.sass",
+							"./node_modules/bootstrap/dist/css/bootstrap.min.css"
 						],
-						"scripts": [],
+						"scripts": [
+							"./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+						],
 						"extraWebpackConfig": "projects/host-app/webpack.config.js",
 						"commonChunk": false
 					},
@@ -137,9 +140,12 @@
 							"projects/insurance-mfe/src/assets"
 						],
 						"styles": [
-							"projects/insurance-mfe/src/styles.sass"
+							"projects/insurance-mfe/src/styles.sass",
+							"./node_modules/bootstrap/dist/css/bootstrap.min.css"
 						],
-						"scripts": [],
+						"scripts": [
+							"./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+						],
 						"extraWebpackConfig": "projects/insurance-mfe/webpack.config.js",
 						"commonChunk": false
 					},
@@ -244,9 +250,12 @@
 							"projects/premium-mfe/src/assets"
 						],
 						"styles": [
-							"projects/premium-mfe/src/styles.sass"
+							"projects/premium-mfe/src/styles.sass",
+							"./node_modules/bootstrap/dist/css/bootstrap.min.css"
 						],
-						"scripts": [],
+						"scripts": [
+							"./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+						],
 						"extraWebpackConfig": "projects/premium-mfe/webpack.config.js",
 						"commonChunk": false
 					},

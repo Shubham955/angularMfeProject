@@ -1,0 +1,7 @@
+Change directory to mfeTask.
+	To run 3 projects below commands to be used:
+		ng serve host-app
+		ng serve insurance-mfe
+		ng serve premium-mfe
+	To run express server stay in mfeTask directory and use following command
+		nodemon index.js

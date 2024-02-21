@@ -1,57 +1,21 @@
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const mf = require("@angular-architects/module-federation/webpack");
-const path = require("path");
-const share = mf.share;
+//const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const { shareAll, withModuleFederationPlugin } = require("@angular-architects/module-federation/webpack");
 
-const sharedMappings = new mf.SharedMappings();
-sharedMappings.register(
-  path.join(__dirname, '../../tsconfig.json'),
-  [/* mapped paths to share */]);
-
-module.exports = {
-  output: {
-    uniqueName: "hostApp",
-    publicPath: "auto"
+module.exports=withModuleFederationPlugin({
+  
+  remotes: {
+    insuranceMfe: 'http://localhost:4201/remoteEntry.js',
+    // below premiumMfe corresponds to name as written in module fedration of mfe webpack.config.js, 
+    // and in value 4202 is the port on which mfe is running
+    premiumMfe: 'http://localhost:4202/remoteEntry.js', 
   },
-  optimization: {
-    runtimeChunk: false
-  },   
-  resolve: {
-    alias: {
-      ...sharedMappings.getAliases(),
-    }
-  },
-  experiments: {
-    outputModule: true
-  },
-  plugins: [
-    new ModuleFederationPlugin({
-        library: { type: "module" },
 
-        // For remotes (please adjust)
-        // name: "hostApp",
-        // filename: "remoteEntry.js",
-        // exposes: {
-        //     './Component': './projects/host-app/src/app/app.component.ts',
-        // },        
-        
-        // For hosts (please adjust)
-        // remotes: {
-        //     "insuranceMfe": "http://localhost:4200/remoteEntry.js",
-        //     "premiumMfe": "http://localhost:4200/remoteEntry.js",
-
-        // },
-
-        shared: share({
-          "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-
-          ...sharedMappings.getDescriptors()
-        })
-        
+  shared: {
+    ...shareAll({
+      singleton: true,
+      strictVersion: true,
+      requiredVersion: 'auto',
     }),
-    sharedMappings.getPlugin()
-  ],
-};
+  },
+  
+})

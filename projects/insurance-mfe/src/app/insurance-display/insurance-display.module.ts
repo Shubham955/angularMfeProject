@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { InsuranceDisplayRoutingModule } from './insurance-display-routing.module';
 import { InsuranceDisplayComponent } from './insurance-display.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { InsuranceDisplayComponent } from './insurance-display.component';
   ],
   imports: [
     CommonModule,
-    InsuranceDisplayRoutingModule
+    InsuranceDisplayRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class InsuranceDisplayModule { }
